@@ -15,4 +15,4 @@ class ZonifySerializer(serializers.ModelSerializer):
 class BureauxSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bureaux
-        exclude = ['id']
+        fields = '__all__'

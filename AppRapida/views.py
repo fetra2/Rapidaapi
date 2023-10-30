@@ -59,7 +59,7 @@ class ProtectedView(APIView):
         return Response({'message': 'Authenticated user', 'user': str(request.user)})
 
 def index(request):
-	return HttpResponse("kaiz")
+	return HttpResponse("Tongasoa Welcome Bienvenue Wilkommen Bienvenido, hombre si!")
 
 
 class Bureau(APIView):
@@ -83,7 +83,7 @@ class ZoneByCodique(APIView):
             return Response({"error": "'two codiques ' are required."}, status=400)   
         try:
             zone = Zonify.objects.filter(ncodiquebur1=codique1, ncodiquebur2=codique2)
-            serializer = ZonifySerializer(zone, many=False) 
+            serializer = ZonifySerializer(zone, many=True) 
             return Response(serializer.data)
         except Zonify.DoesNotExist:
             return Response({"error": "Zone not found for the given parameters."}, status=404)
