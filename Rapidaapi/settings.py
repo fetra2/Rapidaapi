@@ -28,6 +28,26 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+#remove this in prod
+#CORS_ALLOW_ALL_ORIGINS = True
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8000', 'http://localhost:8081', 'http://127.0.0.1:8081',
+]
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+CORS_ORIGIN_WHITELIST = ('http://127.0.0.1:8081')
 
 # Application definition
 
@@ -58,12 +78,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 ]
-#remove this in prod
-CORS_ALLOW_ALL_ORIGINS = True
 
-CORS_ALLOW_ORIGINS = [
-    'http://localhost:8000',
-]
 ROOT_URLCONF = 'Rapidaapi.urls'
 
 TEMPLATES = [
