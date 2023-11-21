@@ -51,9 +51,9 @@ class Facture(models.Model):
     numero_bordereau = models.CharField(max_length=50, db_column='numero_bordereau', null=True, blank=True)
     prix_rapida = models.CharField(max_length=50, db_column='prix_rapida')
     type_paiement = models.IntegerField(max_length=50, choices= TypePaiment.choices, default=TypePaiment.DEPOT, db_column='type_paiement')
-    bureau = models.OneToOneField(Bureaux, on_delete=models.CASCADE)
+    bureau = models.ForeignKey(Bureaux, on_delete=models.CASCADE)
     envoi = models.ForeignKey(Envoi, on_delete=models.CASCADE)
-    expediteur = models.OneToOneField(Personne, on_delete=models.CASCADE, related_name='expediteur')
+    expediteur = models.ForeignKey(Personne, on_delete=models.CASCADE, related_name='expediteur')
     destinataire = models.ForeignKey(Personne, on_delete=models.CASCADE, related_name='destinataire')
     date_facture = models.DateTimeField(auto_now_add=True)
 
