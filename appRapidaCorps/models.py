@@ -50,7 +50,7 @@ class Facture(models.Model):
     numero_facture = models.CharField(max_length=50, db_column='numero_facture', null=True, blank=True)
     numero_bordereau = models.CharField(max_length=50, db_column='numero_bordereau', null=True, blank=True)
     prix_rapida = models.CharField(max_length=50, db_column='prix_rapida')
-    type_paiement = models.IntegerField(max_length=50, choices= TypePaiment.choices, default=TypePaiment.DEPOT, db_column='type_paiement')
+    type_paiement = models.IntegerField(choices= TypePaiment.choices, default=TypePaiment.DEPOT, db_column='type_paiement')
     bureau = models.ForeignKey(Bureaux, on_delete=models.CASCADE)
     envoi = models.ForeignKey(Envoi, on_delete=models.CASCADE)
     expediteur = models.ForeignKey(Personne, on_delete=models.CASCADE, related_name='expediteur')
@@ -89,7 +89,7 @@ class Axe(models.Model):
         db_table = 'rapida_axe'
     
 class Doc(models.Model):
-    envoi = models.ForeignKey(Envoi, on_delete=models.CASCADE)
+    envoi = models.ManyToManyField(Envoi, related_name='envoi_doc')
     axe = models.ForeignKey(Axe, on_delete=models.CASCADE)
     convoyeur = models.CharField(max_length=50)
     voiture = models.CharField(max_length=50)
