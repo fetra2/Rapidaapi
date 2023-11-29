@@ -17,21 +17,13 @@ class Personne(models.Model):
         managed = True
         db_table = 'rapida_personne'
 
-class TypeEnvoi(models.Model):
-    libelle = models.CharField(max_length=50, unique=True)
-    description = models.CharField(max_length=50, null=True, blank=True)
-    def __str__(self):
-        return self.libelle
-    class Meta:
-        managed = True
-        db_table = 'rapida_typeenvoi'
-
 class Envoi(models.Model):
     num_envoi = models.CharField(max_length=50, primary_key=True, db_column='num_envoi')
-    poids = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True, db_column='poids')
+    poids = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True, db_column='poids')
     bureau_exp = models.ForeignKey(Bureaux, on_delete=models.CASCADE, related_name='bureau_exp')
     bureau_dest = models.ForeignKey(Bureaux, on_delete=models.CASCADE, related_name='bureau_dest')
-    type_envoi = models.ForeignKey(TypeEnvoi, on_delete=models.CASCADE, related_name='type_envoi')
+    #type_envoi = models.ForeignKey(TypeEnvoi, on_delete=models.CASCADE, related_name='type_envoi')
+    type_envoi = models.IntegerField(default=0)
     dateEnvoi = models.DateTimeField(auto_now_add=True)
     #prixRapida = models.CharField(max_length=50, db_column='prixRapida') #voir facture
 
@@ -41,16 +33,15 @@ class Envoi(models.Model):
         managed = True
         db_table = 'rapida_envoi'
 
-
 class Facture(models.Model):
-    class TypePaiment(models.IntegerChoices):
+    class TypePayment(models.IntegerChoices):  # Corrected the class name
         DEPOT = 0, "0 depot"
         COLLECT = 1, "1 collect"
 
     numero_facture = models.CharField(max_length=50, db_column='numero_facture', null=True, blank=True)
     numero_bordereau = models.CharField(max_length=50, db_column='numero_bordereau', null=True, blank=True)
     prix_rapida = models.CharField(max_length=50, db_column='prix_rapida')
-    type_paiement = models.IntegerField(choices= TypePaiment.choices, default=TypePaiment.DEPOT, db_column='type_paiement')
+    type_paiement = models.IntegerField(choices=TypePayment.choices, default=TypePayment.DEPOT, db_column='type_paiement')
     bureau = models.ForeignKey(Bureaux, on_delete=models.CASCADE)
     envoi = models.ForeignKey(Envoi, on_delete=models.CASCADE)
     expediteur = models.ForeignKey(Personne, on_delete=models.CASCADE, related_name='expediteur')
