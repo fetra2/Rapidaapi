@@ -3,7 +3,8 @@ from .models import *
 
 # Register your models here.
 #admin.site.register([TypeEnvoi, Axe, Doc] )
-admin.site.register([TypeEnvoi, Doc] )
+#admin.site.register([TypeEnvoi, Doc] )
+admin.site.register([Doc] )
 
 class EnvoiAdmin(admin.ModelAdmin):
     list_display = ('num_envoi', 'poids', 'bureau_exp', 'bureau_dest', 'type_envoi', 'dateEnvoi')
