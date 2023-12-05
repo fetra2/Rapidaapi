@@ -26,6 +26,7 @@ urlpatterns = [
     path('api/envois/<str:pk>', views.EnvoiDetail.as_view(), name='envoi-detail'),
     path('api/factures', views.FactureList.as_view(), name='facture-list'),
     path('api/factures/<str:pk>', views.FactureDetail.as_view(), name='facture-detail'),
+    path('api/factures/bureau/<int:codique>', views.FactureByBureau.as_view({'get': 'list'}), name='facture-by-bureau'),
     path('api/histo', views.HistoriqueList.as_view(), name='historique-list'),
     path('api/histo/<str:pk>', views.HistoriqueDetail.as_view(), name='historique-detail'),
     path('api/axes', views.AxeList.as_view(), name='axe-list'),

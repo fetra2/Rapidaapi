@@ -6,7 +6,7 @@ from appRapidaCorps.serializers import PersonneSerializer, EnvoiSerializer, Fact
 
 #api
 from rest_framework.views import APIView
-from rest_framework import status, generics, permissions
+from rest_framework import status, generics, permissions, viewsets
 
 
 # Create your views here.
@@ -33,6 +33,13 @@ class FactureList(generics.ListCreateAPIView):
 class FactureDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Facture.objects.all()
     serializer_class = FactureSerializer
+
+class FactureByBureau(viewsets.ReadOnlyModelViewSet):
+    serializer_class = FactureSerializer
+
+    def get_queryset(self):
+        codique = self.kwargs['codique']
+        return Facture.objects.filter(bureau__codique=codique)
 
 class HistoriqueList(generics.ListCreateAPIView):
     queryset = Historique.objects.all()
