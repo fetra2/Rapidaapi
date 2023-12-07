@@ -47,6 +47,8 @@ class Facture(models.Model):
     expediteur = models.ForeignKey(Personne, on_delete=models.CASCADE, related_name='expediteur')
     destinataire = models.ForeignKey(Personne, on_delete=models.CASCADE, related_name='destinataire')
     date_facture = models.DateTimeField(auto_now_add=True)
+    statut = models.IntegerField(default=1)#1: ok, 2: annule, 3: annule par erreur technique
+
 
     def __str__(self):
         return self.numero_facture
