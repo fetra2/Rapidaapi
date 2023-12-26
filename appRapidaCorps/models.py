@@ -87,6 +87,7 @@ class Doc(models.Model):
     convoyeur = models.CharField(max_length=50)
     voiture = models.CharField(max_length=50)
     date = models.DateTimeField(auto_now_add=True)
+    owner = models.CharField(max_length=50, null=True)
     def __str__(self):
         return str(self.id)
     class Meta:
