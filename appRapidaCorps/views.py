@@ -134,8 +134,9 @@ class DocDetail(generics.RetrieveUpdateDestroyAPIView):
 class DocByDetailViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = DocSerializer
     def get_queryset(self):
+        #owner = self.request.query_params.get('owner', None)
         bureau = self.request.query_params.get('bureau', None)
         if bureau:
-            return Doc.objects.filter(axe__bureau=bureau)
+            return Doc.objects.filter(owner=bureau)
         else:
             return Doc.objects.all() 

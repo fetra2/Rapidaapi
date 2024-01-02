@@ -28,7 +28,7 @@ class AxeAdmin(admin.ModelAdmin):
     list_display = ('nom', 'isactive', 'get_parents', 'date')
 admin.site.register(Axe, AxeAdmin)
 class DocAdmin(admin.ModelAdmin):
-    list_display = ('id', 'convoyeur', 'voiture', 'display_envoi', 'axe', 'date')
+    list_display = ('id', 'convoyeur', 'voiture', 'display_envoi', 'axe', 'owner', 'date')
     def display_envoi(self, obj):
         return ", ".join([envoi.num_envoi for envoi in obj.envoi.all()])
     display_envoi.short_description = 'Envois'
